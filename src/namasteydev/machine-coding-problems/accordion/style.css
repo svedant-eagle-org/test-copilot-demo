@@ -1,0 +1,57 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+  height: 100vh;
+  width: 100vw;
+}
+
+.accordion-container {
+  border: 2px solid black;
+  height: 400px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.accordion-title {
+  width: 400px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  height: 20px;
+}
+
+.accordion-title:hover,
+.downArrow:hover,
+.rightArrow:hover {
+  background-color: lightgray;
+}
+
+.downArrow {
+  border: none;
+  float: right;
+  margin-right: 10px;
+  background-color: lightgray;
+}
+
+.rightArrow {
+  border: none;
+  float: right;
+  margin-right: 10px;
+  background-color: lightgray;
+}
+
+.accordion-content {
+  border: 1px solid black;
+  height: 50px;
+  text-align: center;
+}
