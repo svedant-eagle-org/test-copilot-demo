@@ -3,7 +3,7 @@
 // import ChipsComponent from "./namasteydev/machine-coding-problems/chips/ChipsComponent";
 // import NestedCheckbox from "./namasteydev/machine-coding-problems/nestedcheckboxes/NestedCheckbox";
 // import TodoList from "./namasteydev/machine-coding-problems/todolist/TodoList";
-import ImagePaginationServerWay from "./pagination/ImagePaginationServerWay";
+// import ImagePaginationServerWay from "./pagination/ImagePaginationServerWay";
 
 // import FileExplorer from "./namasteydev/machine-coding-problems/file-explorer/FileExplorer";
 import Tabs from "./namasteydev/machine-coding-problems/tab-form/Tabs";
