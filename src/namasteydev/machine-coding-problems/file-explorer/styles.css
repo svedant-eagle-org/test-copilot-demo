@@ -1,0 +1,16 @@
+.leftMargin {
+  margin-left: 5px;
+}
+
+button {
+  border: none;
+  background: white;
+}
+
+.folder {
+  margin: 5px;
+}
+
+.modal {
+  margin: 5px;
+}

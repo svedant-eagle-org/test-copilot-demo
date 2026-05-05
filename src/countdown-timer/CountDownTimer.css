@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+}
+.main {
+  display: grid;
+  height: 400px;
+  justify-content: center;
+  align-content: center;
+}
+
+.countdowntimer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.labels {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}
+.inputClass {
+  width: 50px;
+  padding: 20px;
+  margin: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.buttonClass {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}
