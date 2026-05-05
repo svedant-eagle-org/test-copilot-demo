@@ -9,6 +9,7 @@ const Tabs = () => {
     name: "",
     age: 0,
     email_id: "",
+    address: "",
     interests: ["Music"],
     theme: "light",
   });
@@ -28,8 +29,11 @@ const Tabs = () => {
         if (!data?.email_id || data?.email_id?.length <= 2) {
           err.email_id = "Email Id not Valid";
         }
+        if (!data?.address || data?.address?.trim()?.length === 0) {
+          err.address = "Address cannot be empty";
+        }
         setError(err);
-        return err.name || err.age || err.email_id ? false : true;
+        return err.name || err.age || err.email_id || err.address ? false : true;
       },
     },
     {

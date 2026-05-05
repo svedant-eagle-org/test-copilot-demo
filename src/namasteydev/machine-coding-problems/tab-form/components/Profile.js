@@ -1,6 +1,6 @@
 import "../styles.css";
 const Profile = ({ data, setData, error }) => {
-  const { name, age, email_id } = data;
+  const { name, age, email_id, address } = data;
   const handleProfileData = (e, item) => {
     setData({ ...data, [item]: e?.target?.value });
   };
@@ -36,6 +36,16 @@ const Profile = ({ data, setData, error }) => {
         />
       </div>
       {error?.email_id && <span className="error">Email is not Valid</span>}
+      <div className="formInput">
+        <label for="address">Address:</label>
+        <input
+          id="address"
+          type="text"
+          value={address}
+          onChange={(e) => handleProfileData(e, "address")}
+        />
+      </div>
+      {error?.address && <span className="error">Address cannot be empty</span>}
     </div>
   );
 };
