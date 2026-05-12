@@ -1,6 +1,6 @@
 import "../styles.css";
 const Profile = ({ data, setData, error }) => {
-  const { name, age, email_id, address } = data;
+  const { name, age, email_id, address, language } = data;
   const handleProfileData = (e, item) => {
     setData({ ...data, [item]: e?.target?.value });
   };
@@ -46,6 +46,22 @@ const Profile = ({ data, setData, error }) => {
         />
       </div>
       {error?.address && <span className="error">Address cannot be empty</span>}
+      <div className="formInput">
+        <label for="language">Language:</label>
+        <select
+          id="language"
+          value={language}
+          onChange={(e) => handleProfileData(e, "language")}
+        >
+          <option value="">Select Language</option>
+          <option value="English">English</option>
+          <option value="Hindi">Hindi</option>
+          <option value="French">French</option>
+        </select>
+      </div>
+      {error?.language && (
+        <span className="error">Language should be selected</span>
+      )}
     </div>
   );
 };
