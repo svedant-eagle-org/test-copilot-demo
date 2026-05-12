@@ -10,6 +10,7 @@ const Tabs = () => {
     age: 0,
     email_id: "",
     address: "",
+    language: "",
     interests: ["Music"],
     theme: "light",
   });
@@ -32,8 +33,13 @@ const Tabs = () => {
         if (!data?.address || data?.address?.trim()?.length === 0) {
           err.address = "Address cannot be empty";
         }
+        if (!data?.language) {
+          err.language = "Language should be selected";
+        }
         setError(err);
-        return err.name || err.age || err.email_id || err.address ? false : true;
+        return err.name || err.age || err.email_id || err.address || err.language
+          ? false
+          : true;
       },
     },
     {
