@@ -11,6 +11,7 @@ const Tabs = () => {
     email_id: "",
     address: "",
     language: "",
+    port: "",
     interests: ["Music"],
     theme: "light",
   });
@@ -36,8 +37,11 @@ const Tabs = () => {
         if (!data?.language) {
           err.language = "Language should be selected";
         }
+        if (!data?.port) {
+          err.port = "Port should be selected";
+        }
         setError(err);
-        return err.name || err.age || err.email_id || err.address || err.language
+        return err.name || err.age || err.email_id || err.address || err.language || err.port
           ? false
           : true;
       },
