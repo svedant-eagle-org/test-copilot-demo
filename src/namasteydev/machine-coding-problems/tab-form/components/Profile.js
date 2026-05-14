@@ -1,6 +1,6 @@
 import "../styles.css";
 const Profile = ({ data, setData, error }) => {
-  const { name, age, email_id, address, language } = data;
+  const { name, age, email_id, address, language, port } = data;
   const handleProfileData = (e, item) => {
     setData({ ...data, [item]: e?.target?.value });
   };
@@ -61,6 +61,22 @@ const Profile = ({ data, setData, error }) => {
       </div>
       {error?.language && (
         <span className="error">Language should be selected</span>
+      )}
+      <div className="formInput">
+        <label for="port">Port:</label>
+        <select
+          id="port"
+          value={port}
+          onChange={(e) => handleProfileData(e, "port")}
+        >
+          <option value="">Select Port</option>
+          <option value="Houston">Houston</option>
+          <option value="Pune">Pune</option>
+          <option value="Shanghai">Shanghai</option>
+        </select>
+      </div>
+      {error?.port && (
+        <span className="error">Port should be selected</span>
       )}
     </div>
   );
