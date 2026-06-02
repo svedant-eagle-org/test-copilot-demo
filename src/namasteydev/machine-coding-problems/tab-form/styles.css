@@ -49,3 +49,9 @@
   display: block;
   color: red;
 }
+
+.clearButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin: 5px;
+}
