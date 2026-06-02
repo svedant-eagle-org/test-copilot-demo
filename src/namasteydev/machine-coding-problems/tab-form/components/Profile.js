@@ -1,5 +1,5 @@
 import "../styles.css";
-const Profile = ({ data, setData, error }) => {
+const Profile = ({ data, setData, error, onClear }) => {
   const { name, age, email_id, address, language, port } = data;
   const handleProfileData = (e, item) => {
     setData({ ...data, [item]: e?.target?.value });
@@ -78,6 +78,9 @@ const Profile = ({ data, setData, error }) => {
       {error?.port && (
         <span className="error">Port should be selected</span>
       )}
+      <div className="clearButtonContainer">
+        <button onClick={onClear}>Clear</button>
+      </div>
     </div>
   );
 };

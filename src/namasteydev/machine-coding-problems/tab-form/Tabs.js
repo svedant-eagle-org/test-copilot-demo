@@ -4,18 +4,23 @@ import Profile from "./components/Profile";
 import Settings from "./components/Settings";
 import "./styles.css";
 const Tabs = () => {
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
-  const [data, setData] = useState({
+  const getClearData = () => ({
     name: "",
-    age: 0,
+    age: "",
     email_id: "",
     address: "",
     language: "",
     port: "",
-    interests: ["Music"],
-    theme: "light",
+    interests: [],
+    theme: "",
   });
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [data, setData] = useState(getClearData);
   const [error, setError] = useState({});
+  const handleClear = () => {
+    setData(getClearData());
+    setError({});
+  };
   const tabs = [
     {
       title: "Profile",
@@ -94,6 +99,7 @@ const Tabs = () => {
           setData={setData}
           error={error}
           setError={setError}
+          onClear={handleClear}
         />
       </div>
       <div>
