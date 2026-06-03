@@ -1,6 +1,6 @@
 import "../styles.css";
 const Profile = ({ data, setData, error, onClear }) => {
-  const { name, age, email_id, address, language, port } = data;
+  const { name, age, email_id, address, language, port, job_title, company, about_me } = data;
   const handleProfileData = (e, item) => {
     setData({ ...data, [item]: e?.target?.value });
   };
@@ -77,6 +77,44 @@ const Profile = ({ data, setData, error, onClear }) => {
       </div>
       {error?.port && (
         <span className="error">Port should be selected</span>
+      )}
+      <h3>Profession/Bio</h3>
+      <div className="formInput">
+        <label for="job_title">Job Title:</label>
+        <input
+          id="job_title"
+          type="text"
+          value={job_title}
+          onChange={(e) => handleProfileData(e, "job_title")}
+        />
+      </div>
+      {error?.job_title && (
+        <span className="error">Job Title cannot be empty</span>
+      )}
+      <div className="formInput">
+        <label for="company">Company:</label>
+        <input
+          id="company"
+          type="text"
+          value={company}
+          onChange={(e) => handleProfileData(e, "company")}
+        />
+      </div>
+      {error?.company && (
+        <span className="error">Company cannot be empty</span>
+      )}
+      <div className="formInput">
+        <label for="about_me">About Me:</label>
+        <textarea
+          id="about_me"
+          rows="6"
+          cols="50"
+          value={about_me}
+          onChange={(e) => handleProfileData(e, "about_me")}
+        />
+      </div>
+      {error?.about_me && (
+        <span className="error">About Me cannot be empty</span>
       )}
       <div className="clearButtonContainer">
         <button onClick={onClear}>Clear</button>
