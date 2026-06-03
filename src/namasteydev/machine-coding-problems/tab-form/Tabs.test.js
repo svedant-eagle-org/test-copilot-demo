@@ -36,6 +36,18 @@ describe("Tabs Profile Language field", () => {
     fireEvent.change(screen.getByLabelText("Port:"), {
       target: { value: "Houston" },
     });
+    fireEvent.change(screen.getByLabelText("Job Title:"), {
+      target: { value: "Engineer" },
+    });
+    fireEvent.change(screen.getByLabelText("Company:"), {
+      target: { value: "ABS" },
+    });
+    fireEvent.change(screen.getByLabelText("About Me:"), {
+      target: {
+        value:
+          "I love building products and collaborating with teams to deliver reliable software for users.",
+      },
+    });
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
 
     expect(screen.getByText("Music:")).toBeInTheDocument();
@@ -77,6 +89,73 @@ describe("Tabs Profile Port field", () => {
     fireEvent.change(screen.getByLabelText("Port:"), {
       target: { value: "Pune" },
     });
+    fireEvent.change(screen.getByLabelText("Job Title:"), {
+      target: { value: "Engineer" },
+    });
+    fireEvent.change(screen.getByLabelText("Company:"), {
+      target: { value: "ABS" },
+    });
+    fireEvent.change(screen.getByLabelText("About Me:"), {
+      target: {
+        value:
+          "I love building products and collaborating with teams to deliver reliable software for users.",
+      },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+
+    expect(screen.getByText("Music:")).toBeInTheDocument();
+  });
+});
+
+describe("Tabs Profile Profession/Bio fields", () => {
+  test("shows profession/bio section with job title, company and about me fields", () => {
+    render(<Tabs />);
+
+    expect(screen.getByText("Profession/Bio")).toBeInTheDocument();
+    expect(screen.getByLabelText("Job Title:")).toBeInTheDocument();
+    expect(screen.getByLabelText("Company:")).toBeInTheDocument();
+    expect(screen.getByLabelText("About Me:")).toBeInTheDocument();
+  });
+
+  test("requires profession/bio fields before moving to next tab", () => {
+    render(<Tabs />);
+
+    fireEvent.change(screen.getByLabelText("Name:"), { target: { value: "John" } });
+    fireEvent.change(screen.getByLabelText("Age:"), { target: { value: "30" } });
+    fireEvent.change(screen.getByLabelText("Email Id:"), {
+      target: { value: "john@example.com" },
+    });
+    fireEvent.change(screen.getByLabelText("Address:"), {
+      target: { value: "Street 1" },
+    });
+    fireEvent.change(screen.getByLabelText("Language:"), {
+      target: { value: "English" },
+    });
+    fireEvent.change(screen.getByLabelText("Port:"), {
+      target: { value: "Pune" },
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    expect(screen.getByText("Job Title cannot be empty")).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Job Title:"), {
+      target: { value: "Engineer" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    expect(screen.getByText("Company cannot be empty")).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Company:"), {
+      target: { value: "ABS" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    expect(screen.getByText("About Me cannot be empty")).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("About Me:"), {
+      target: {
+        value:
+          "I love building products and collaborating with teams to deliver reliable software for users.",
+      },
+    });
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
 
     expect(screen.getByText("Music:")).toBeInTheDocument();
@@ -104,6 +183,18 @@ describe("Tabs clear button", () => {
     fireEvent.change(screen.getByLabelText("Port:"), {
       target: { value: "Pune" },
     });
+    fireEvent.change(screen.getByLabelText("Job Title:"), {
+      target: { value: "Engineer" },
+    });
+    fireEvent.change(screen.getByLabelText("Company:"), {
+      target: { value: "ABS" },
+    });
+    fireEvent.change(screen.getByLabelText("About Me:"), {
+      target: {
+        value:
+          "I love building products and collaborating with teams to deliver reliable software for users.",
+      },
+    });
 
     fireEvent.click(screen.getByRole("button", { name: "Clear" }));
 
@@ -113,6 +204,9 @@ describe("Tabs clear button", () => {
     expect(screen.getByLabelText("Address:").value).toBe("");
     expect(screen.getByLabelText("Language:").value).toBe("");
     expect(screen.getByLabelText("Port:").value).toBe("");
+    expect(screen.getByLabelText("Job Title:").value).toBe("");
+    expect(screen.getByLabelText("Company:").value).toBe("");
+    expect(screen.getByLabelText("About Me:").value).toBe("");
     expect(screen.queryByText("Name is not Valid")).not.toBeInTheDocument();
 
     fireEvent.change(screen.getByLabelText("Name:"), { target: { value: "John" } });
@@ -128,6 +222,18 @@ describe("Tabs clear button", () => {
     });
     fireEvent.change(screen.getByLabelText("Port:"), {
       target: { value: "Pune" },
+    });
+    fireEvent.change(screen.getByLabelText("Job Title:"), {
+      target: { value: "Engineer" },
+    });
+    fireEvent.change(screen.getByLabelText("Company:"), {
+      target: { value: "ABS" },
+    });
+    fireEvent.change(screen.getByLabelText("About Me:"), {
+      target: {
+        value:
+          "I love building products and collaborating with teams to deliver reliable software for users.",
+      },
     });
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
 

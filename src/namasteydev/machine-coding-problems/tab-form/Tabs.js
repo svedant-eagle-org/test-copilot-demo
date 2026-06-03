@@ -11,6 +11,9 @@ const Tabs = () => {
     address: "",
     language: "",
     port: "",
+    job_title: "",
+    company: "",
+    about_me: "",
     interests: [],
     theme: "",
   });
@@ -45,8 +48,17 @@ const Tabs = () => {
         if (!data?.port) {
           err.port = "Port should be selected";
         }
+        if (!data?.job_title || data?.job_title?.trim()?.length === 0) {
+          err.job_title = "Job Title cannot be empty";
+        }
+        if (!data?.company || data?.company?.trim()?.length === 0) {
+          err.company = "Company cannot be empty";
+        }
+        if (!data?.about_me || data?.about_me?.trim()?.length === 0) {
+          err.about_me = "About Me cannot be empty";
+        }
         setError(err);
-        return err.name || err.age || err.email_id || err.address || err.language || err.port
+        return err.name || err.age || err.email_id || err.address || err.language || err.port || err.job_title || err.company || err.about_me
           ? false
           : true;
       },
