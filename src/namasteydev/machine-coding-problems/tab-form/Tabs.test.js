@@ -247,3 +247,49 @@ describe("Tabs clear button", () => {
     radios.forEach((radio) => expect(radio.checked).toBe(false));
   });
 });
+
+describe("Tabs Interest Java checkbox", () => {
+  test("shows Java checkbox above JavaScript and keeps interest validation behavior", () => {
+    render(<Tabs />);
+
+    fireEvent.change(screen.getByLabelText("Name:"), { target: { value: "John" } });
+    fireEvent.change(screen.getByLabelText("Age:"), { target: { value: "30" } });
+    fireEvent.change(screen.getByLabelText("Email Id:"), {
+      target: { value: "john@example.com" },
+    });
+    fireEvent.change(screen.getByLabelText("Address:"), {
+      target: { value: "Street 1" },
+    });
+    fireEvent.change(screen.getByLabelText("Language:"), {
+      target: { value: "English" },
+    });
+    fireEvent.change(screen.getByLabelText("Port:"), {
+      target: { value: "Pune" },
+    });
+    fireEvent.change(screen.getByLabelText("Job Title:"), {
+      target: { value: "Engineer" },
+    });
+    fireEvent.change(screen.getByLabelText("Company:"), {
+      target: { value: "ABS" },
+    });
+    fireEvent.change(screen.getByLabelText("About Me:"), {
+      target: {
+        value:
+          "I love building products and collaborating with teams to deliver reliable software for users.",
+      },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+
+    expect(screen.getByText("Java:")).toBeInTheDocument();
+    expect(screen.getByText("JavaScript:")).toBeInTheDocument();
+    const checkboxes = screen.getAllByRole("checkbox");
+    expect(checkboxes).toHaveLength(4);
+
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    expect(screen.getByText("Select any interests")).toBeInTheDocument();
+
+    fireEvent.click(checkboxes[2]);
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    expect(screen.getByText("Dark")).toBeInTheDocument();
+  });
+});
