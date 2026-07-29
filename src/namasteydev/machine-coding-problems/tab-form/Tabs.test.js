@@ -248,6 +248,57 @@ describe("Tabs clear button", () => {
   });
 });
 
+describe("Tabs Interest AI checkbox", () => {
+  test("shows AI checkbox above Java and satisfies interest validation", () => {
+    render(<Tabs />);
+
+    fireEvent.change(screen.getByLabelText("Name:"), { target: { value: "John" } });
+    fireEvent.change(screen.getByLabelText("Age:"), { target: { value: "30" } });
+    fireEvent.change(screen.getByLabelText("Email Id:"), {
+      target: { value: "john@example.com" },
+    });
+    fireEvent.change(screen.getByLabelText("Address:"), {
+      target: { value: "Street 1" },
+    });
+    fireEvent.change(screen.getByLabelText("Language:"), {
+      target: { value: "English" },
+    });
+    fireEvent.change(screen.getByLabelText("Port:"), {
+      target: { value: "Pune" },
+    });
+    fireEvent.change(screen.getByLabelText("Job Title:"), {
+      target: { value: "Engineer" },
+    });
+    fireEvent.change(screen.getByLabelText("Company:"), {
+      target: { value: "ABS" },
+    });
+    fireEvent.change(screen.getByLabelText("About Me:"), {
+      target: {
+        value:
+          "I love building products and collaborating with teams to deliver reliable software for users.",
+      },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+
+    const checkboxes = screen.getAllByRole("checkbox");
+    // Order: Music(0), Driving(1), AI(2), Java(3), JavaScript(4)
+    expect(checkboxes).toHaveLength(5);
+
+    const labels = screen.getAllByText(/^(Music|Driving|AI|Java|JavaScript):$/);
+    const aiIndex = labels.findIndex((l) => l.textContent === "AI:");
+    const javaIndex = labels.findIndex((l) => l.textContent === "Java:");
+    expect(aiIndex).toBeLessThan(javaIndex);
+
+    // Selecting only AI satisfies the interest validation
+    fireEvent.click(checkboxes[2]);
+    expect(checkboxes[2].checked).toBe(true);
+
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    expect(screen.queryByText("Select any interests")).not.toBeInTheDocument();
+    expect(screen.getByText("Dark")).toBeInTheDocument();
+  });
+});
+
 describe("Tabs Interest Java checkbox", () => {
   test("shows Java checkbox above JavaScript and keeps interest validation behavior", () => {
     render(<Tabs />);
@@ -280,10 +331,11 @@ describe("Tabs Interest Java checkbox", () => {
     });
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
 
+    expect(screen.getByText("AI:")).toBeInTheDocument();
     expect(screen.getByText("Java:")).toBeInTheDocument();
     expect(screen.getByText("JavaScript:")).toBeInTheDocument();
     const checkboxes = screen.getAllByRole("checkbox");
-    expect(checkboxes).toHaveLength(4);
+    expect(checkboxes).toHaveLength(5);
 
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
     expect(screen.getByText("Select any interests")).toBeInTheDocument();

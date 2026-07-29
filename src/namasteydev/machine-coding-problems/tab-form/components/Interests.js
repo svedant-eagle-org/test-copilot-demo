@@ -32,6 +32,14 @@ const Interests = ({ data, setData, error }) => {
           />
         </div>
         <div className="formInput">
+          <label>AI:</label>
+          <input
+            type="checkbox"
+            onChange={(e) => handleInterestData(e, "AI")}
+            checked={interests.includes("AI")}
+          />
+        </div>
+        <div className="formInput">
           <label>Java:</label>
           <input
             type="checkbox"
