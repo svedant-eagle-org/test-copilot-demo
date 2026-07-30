@@ -1,6 +1,6 @@
 import "../styles.css";
 const Profile = ({ data, setData, error, onClear }) => {
-  const { name, age, email_id, address, language, port, job_title, company, about_me } = data;
+  const { name, age, email_id, address, language, port, job_title, company, about_me, experience_level, employment_type, career_goals } = data;
   const handleProfileData = (e, item) => {
     setData({ ...data, [item]: e?.target?.value });
   };
@@ -116,6 +116,52 @@ const Profile = ({ data, setData, error, onClear }) => {
       {error?.about_me && (
         <span className="error">About Me cannot be empty</span>
       )}
+      <h3>Employment Summary</h3>
+      <div className="formInput">
+        <label for="experience_level">Experience level:</label>
+        <select
+          id="experience_level"
+          value={experience_level}
+          onChange={(e) => handleProfileData(e, "experience_level")}
+        >
+          <option value="">Select Experience level</option>
+          <option value="Fresher">Fresher</option>
+          <option value="Mid">Mid</option>
+          <option value="Senior">Senior</option>
+        </select>
+      </div>
+      {error?.experience_level && (
+        <span className="error">Experience level should be selected</span>
+      )}
+      <div className="formInput">
+        <label for="employment_type">Employment type:</label>
+        <select
+          id="employment_type"
+          value={employment_type}
+          onChange={(e) => handleProfileData(e, "employment_type")}
+        >
+          <option value="">Select Employment type</option>
+          <option value="Full-time">Full-time</option>
+          <option value="Contract">Contract</option>
+          <option value="Intern">Intern</option>
+        </select>
+      </div>
+      {error?.employment_type && (
+        <span className="error">Employment type should be selected</span>
+      )}
+      <div className="formInput">
+        <label for="career_goals">Career goals:</label>
+        <textarea
+          id="career_goals"
+          rows="8"
+          cols="50"
+          value={career_goals}
+          onChange={(e) => handleProfileData(e, "career_goals")}
+        />
+      </div>
+      {error?.career_goals && (
+        <span className="error">Career goals cannot be empty</span>
+      )}
       <div className="clearButtonContainer">
         <button onClick={onClear}>Clear</button>
       </div>
@@ -123,3 +169,4 @@ const Profile = ({ data, setData, error, onClear }) => {
   );
 };
 export default Profile;
+

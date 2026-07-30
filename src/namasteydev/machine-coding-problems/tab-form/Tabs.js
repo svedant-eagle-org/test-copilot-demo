@@ -14,6 +14,9 @@ const Tabs = () => {
     job_title: "",
     company: "",
     about_me: "",
+    experience_level: "",
+    employment_type: "",
+    career_goals: "",
     interests: [],
     theme: "",
   });
@@ -57,8 +60,17 @@ const Tabs = () => {
         if (!data?.about_me || data?.about_me?.trim()?.length === 0) {
           err.about_me = "About Me cannot be empty";
         }
+        if (!data?.experience_level) {
+          err.experience_level = "Experience level should be selected";
+        }
+        if (!data?.employment_type) {
+          err.employment_type = "Employment type should be selected";
+        }
+        if (!data?.career_goals || data?.career_goals?.trim()?.length === 0) {
+          err.career_goals = "Career goals cannot be empty";
+        }
         setError(err);
-        return err.name || err.age || err.email_id || err.address || err.language || err.port || err.job_title || err.company || err.about_me
+        return err.name || err.age || err.email_id || err.address || err.language || err.port || err.job_title || err.company || err.about_me || err.experience_level || err.employment_type || err.career_goals
           ? false
           : true;
       },

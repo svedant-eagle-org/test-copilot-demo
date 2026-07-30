@@ -48,6 +48,15 @@ describe("Tabs Profile Language field", () => {
           "I love building products and collaborating with teams to deliver reliable software for users.",
       },
     });
+    fireEvent.change(screen.getByLabelText("Experience level:"), {
+      target: { value: "Mid" },
+    });
+    fireEvent.change(screen.getByLabelText("Employment type:"), {
+      target: { value: "Full-time" },
+    });
+    fireEvent.change(screen.getByLabelText("Career goals:"), {
+      target: { value: "I want to grow as a software engineer and lead impactful projects." },
+    });
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
 
     expect(screen.getByText("Music:")).toBeInTheDocument();
@@ -100,6 +109,15 @@ describe("Tabs Profile Port field", () => {
         value:
           "I love building products and collaborating with teams to deliver reliable software for users.",
       },
+    });
+    fireEvent.change(screen.getByLabelText("Experience level:"), {
+      target: { value: "Senior" },
+    });
+    fireEvent.change(screen.getByLabelText("Employment type:"), {
+      target: { value: "Contract" },
+    });
+    fireEvent.change(screen.getByLabelText("Career goals:"), {
+      target: { value: "I want to grow as a software engineer and lead impactful projects." },
     });
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
 
@@ -156,9 +174,163 @@ describe("Tabs Profile Profession/Bio fields", () => {
           "I love building products and collaborating with teams to deliver reliable software for users.",
       },
     });
+    fireEvent.change(screen.getByLabelText("Experience level:"), {
+      target: { value: "Mid" },
+    });
+    fireEvent.change(screen.getByLabelText("Employment type:"), {
+      target: { value: "Full-time" },
+    });
+    fireEvent.change(screen.getByLabelText("Career goals:"), {
+      target: { value: "I want to grow as a software engineer and lead impactful projects." },
+    });
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
 
     expect(screen.getByText("Music:")).toBeInTheDocument();
+  });
+});
+
+describe("Tabs Profile Employment Summary section", () => {
+  test("shows employment summary section with heading and all three fields", () => {
+    render(<Tabs />);
+
+    expect(screen.getByText("Employment Summary")).toBeInTheDocument();
+    expect(screen.getByLabelText("Experience level:")).toBeInTheDocument();
+    expect(screen.getByLabelText("Employment type:")).toBeInTheDocument();
+    expect(screen.getByLabelText("Career goals:")).toBeInTheDocument();
+  });
+
+  test("shows experience level dropdown with expected options and no default selection", () => {
+    render(<Tabs />);
+
+    const experienceLevelSelect = screen.getByLabelText("Experience level:");
+    expect(experienceLevelSelect.value).toBe("");
+    expect(screen.getByRole("option", { name: "Fresher" })).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: "Mid" })).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: "Senior" })).toBeInTheDocument();
+  });
+
+  test("shows employment type dropdown with expected options and no default selection", () => {
+    render(<Tabs />);
+
+    const employmentTypeSelect = screen.getByLabelText("Employment type:");
+    expect(employmentTypeSelect.value).toBe("");
+    expect(screen.getByRole("option", { name: "Full-time" })).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: "Contract" })).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: "Intern" })).toBeInTheDocument();
+  });
+
+  test("requires experience level selection before moving to next tab", () => {
+    render(<Tabs />);
+
+    fireEvent.change(screen.getByLabelText("Name:"), { target: { value: "John" } });
+    fireEvent.change(screen.getByLabelText("Age:"), { target: { value: "30" } });
+    fireEvent.change(screen.getByLabelText("Email Id:"), {
+      target: { value: "john@example.com" },
+    });
+    fireEvent.change(screen.getByLabelText("Address:"), {
+      target: { value: "Street 1" },
+    });
+    fireEvent.change(screen.getByLabelText("Language:"), {
+      target: { value: "English" },
+    });
+    fireEvent.change(screen.getByLabelText("Port:"), {
+      target: { value: "Pune" },
+    });
+    fireEvent.change(screen.getByLabelText("Job Title:"), {
+      target: { value: "Engineer" },
+    });
+    fireEvent.change(screen.getByLabelText("Company:"), {
+      target: { value: "ABS" },
+    });
+    fireEvent.change(screen.getByLabelText("About Me:"), {
+      target: {
+        value:
+          "I love building products and collaborating with teams to deliver reliable software for users.",
+      },
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    expect(screen.getByText("Experience level should be selected")).toBeInTheDocument();
+    expect(screen.queryByText("Music:")).not.toBeInTheDocument();
+  });
+
+  test("requires employment type selection before moving to next tab", () => {
+    render(<Tabs />);
+
+    fireEvent.change(screen.getByLabelText("Name:"), { target: { value: "John" } });
+    fireEvent.change(screen.getByLabelText("Age:"), { target: { value: "30" } });
+    fireEvent.change(screen.getByLabelText("Email Id:"), {
+      target: { value: "john@example.com" },
+    });
+    fireEvent.change(screen.getByLabelText("Address:"), {
+      target: { value: "Street 1" },
+    });
+    fireEvent.change(screen.getByLabelText("Language:"), {
+      target: { value: "English" },
+    });
+    fireEvent.change(screen.getByLabelText("Port:"), {
+      target: { value: "Pune" },
+    });
+    fireEvent.change(screen.getByLabelText("Job Title:"), {
+      target: { value: "Engineer" },
+    });
+    fireEvent.change(screen.getByLabelText("Company:"), {
+      target: { value: "ABS" },
+    });
+    fireEvent.change(screen.getByLabelText("About Me:"), {
+      target: {
+        value:
+          "I love building products and collaborating with teams to deliver reliable software for users.",
+      },
+    });
+    fireEvent.change(screen.getByLabelText("Experience level:"), {
+      target: { value: "Fresher" },
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    expect(screen.getByText("Employment type should be selected")).toBeInTheDocument();
+    expect(screen.queryByText("Music:")).not.toBeInTheDocument();
+  });
+
+  test("requires career goals to be filled before moving to next tab", () => {
+    render(<Tabs />);
+
+    fireEvent.change(screen.getByLabelText("Name:"), { target: { value: "John" } });
+    fireEvent.change(screen.getByLabelText("Age:"), { target: { value: "30" } });
+    fireEvent.change(screen.getByLabelText("Email Id:"), {
+      target: { value: "john@example.com" },
+    });
+    fireEvent.change(screen.getByLabelText("Address:"), {
+      target: { value: "Street 1" },
+    });
+    fireEvent.change(screen.getByLabelText("Language:"), {
+      target: { value: "English" },
+    });
+    fireEvent.change(screen.getByLabelText("Port:"), {
+      target: { value: "Pune" },
+    });
+    fireEvent.change(screen.getByLabelText("Job Title:"), {
+      target: { value: "Engineer" },
+    });
+    fireEvent.change(screen.getByLabelText("Company:"), {
+      target: { value: "ABS" },
+    });
+    fireEvent.change(screen.getByLabelText("About Me:"), {
+      target: {
+        value:
+          "I love building products and collaborating with teams to deliver reliable software for users.",
+      },
+    });
+    fireEvent.change(screen.getByLabelText("Experience level:"), {
+      target: { value: "Senior" },
+    });
+    fireEvent.change(screen.getByLabelText("Employment type:"), {
+      target: { value: "Full-time" },
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    expect(screen.getByText("Career goals cannot be empty")).toBeInTheDocument();
+    expect(screen.queryByText("Music:")).not.toBeInTheDocument();
   });
 });
 
@@ -195,6 +367,15 @@ describe("Tabs clear button", () => {
           "I love building products and collaborating with teams to deliver reliable software for users.",
       },
     });
+    fireEvent.change(screen.getByLabelText("Experience level:"), {
+      target: { value: "Mid" },
+    });
+    fireEvent.change(screen.getByLabelText("Employment type:"), {
+      target: { value: "Full-time" },
+    });
+    fireEvent.change(screen.getByLabelText("Career goals:"), {
+      target: { value: "I want to grow as a software engineer and lead impactful projects." },
+    });
 
     fireEvent.click(screen.getByRole("button", { name: "Clear" }));
 
@@ -207,6 +388,9 @@ describe("Tabs clear button", () => {
     expect(screen.getByLabelText("Job Title:").value).toBe("");
     expect(screen.getByLabelText("Company:").value).toBe("");
     expect(screen.getByLabelText("About Me:").value).toBe("");
+    expect(screen.getByLabelText("Experience level:").value).toBe("");
+    expect(screen.getByLabelText("Employment type:").value).toBe("");
+    expect(screen.getByLabelText("Career goals:").value).toBe("");
     expect(screen.queryByText("Name is not Valid")).not.toBeInTheDocument();
 
     fireEvent.change(screen.getByLabelText("Name:"), { target: { value: "John" } });
@@ -234,6 +418,15 @@ describe("Tabs clear button", () => {
         value:
           "I love building products and collaborating with teams to deliver reliable software for users.",
       },
+    });
+    fireEvent.change(screen.getByLabelText("Experience level:"), {
+      target: { value: "Senior" },
+    });
+    fireEvent.change(screen.getByLabelText("Employment type:"), {
+      target: { value: "Contract" },
+    });
+    fireEvent.change(screen.getByLabelText("Career goals:"), {
+      target: { value: "I want to grow as a software engineer and lead impactful projects." },
     });
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
 
@@ -277,6 +470,15 @@ describe("Tabs Interest AI checkbox", () => {
         value:
           "I love building products and collaborating with teams to deliver reliable software for users.",
       },
+    });
+    fireEvent.change(screen.getByLabelText("Experience level:"), {
+      target: { value: "Mid" },
+    });
+    fireEvent.change(screen.getByLabelText("Employment type:"), {
+      target: { value: "Full-time" },
+    });
+    fireEvent.change(screen.getByLabelText("Career goals:"), {
+      target: { value: "I want to grow as a software engineer and lead impactful projects." },
     });
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
 
@@ -328,6 +530,15 @@ describe("Tabs Interest Java checkbox", () => {
         value:
           "I love building products and collaborating with teams to deliver reliable software for users.",
       },
+    });
+    fireEvent.change(screen.getByLabelText("Experience level:"), {
+      target: { value: "Senior" },
+    });
+    fireEvent.change(screen.getByLabelText("Employment type:"), {
+      target: { value: "Contract" },
+    });
+    fireEvent.change(screen.getByLabelText("Career goals:"), {
+      target: { value: "I want to grow as a software engineer and lead impactful projects." },
     });
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
 
